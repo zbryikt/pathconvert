@@ -13,4 +13,4 @@ result = path2curve(YourSVGDAttribute);
 License
 ================
 
-Apache License
+[Apache License](https://raw.githubusercontent.com/zbryikt/path2curve/master/LICENSE)
