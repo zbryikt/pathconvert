@@ -556,7 +556,7 @@ function path2curve(path, path2) {
 }
 module.exports = path2curve;
 if(typeof(window)!=="undefined") {
-  window.toCubic = path2curve;
+  window.path2curve = path2curve;
 }
 })();
 
