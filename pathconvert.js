@@ -10,8 +10,8 @@ var pathValues = /(-?\d*\.?\d*(?:e[\-+]?\\d+)?)[\s]*,?[\s]*/ig;
 
 function fillPathItem(pathItem, last, current) {
   if(!last) { return; }
-  if((cur || ["M"])[0] == "M") {
-    pathItem.push([last[1], last[2]);
+  if((current || ["M"])[0] == "M") {
+    pathItem.push([last[1], last[2]]);
   }
 }
 function path2pathItem(path) {
@@ -22,7 +22,7 @@ function curve2pathItem(curve) {
   for(i=0;i<curve.length;i++) {
     item = curve[i];
     if(item[0] == "M") {
-      fillPathItem(last, item);
+      fillPathItem(list, last, item);
       list.push([item[1],-item[2]]);
       list.push([item[1],-item[2]]);
     } else if(item[0] == "C") {
@@ -32,7 +32,7 @@ function curve2pathItem(curve) {
     }
     last = item;
   }
-  fillPathItem(last, null);
+  fillPathItem(list, last, null);
   for(i=0;i<list.length;i+=3) {
     result.push([
       "C", 
