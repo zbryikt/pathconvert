@@ -1,24 +1,24 @@
 {
-  "name": "path2curve",
+  "name": "pathconvert",
   "description": "Convert SVG path element's d attribute into list of anchor + control points. Code adopted from Snap.svg.",
   "version": "0.0.1",
   "keywords": [ "SVG", "Anchor", "Bezier", "Snap" ],
-  "homepage": "https://github.com/zbryikt/path2curve",
+  "homepage": "https://github.com/zbryikt/pathconvert",
   "author": {
     "name": "Kirby T. Wu",
     "url": "http://tkirby.org/blog/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zbryikt/path2curve"
+    "url": "https://github.com/zbryikt/pathconvert"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/zbryikt/path2curve/raw/master/LICENSE"
+      "url": "http://github.com/zbryikt/pathconvert/raw/master/LICENSE"
     }
   ],
-  "main": "path2curve.js",
+  "main": "pathconvert.js",
   "dependencies": {
   }
 }

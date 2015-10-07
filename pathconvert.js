@@ -7,6 +7,42 @@ var toFloat = parseFloat;
 var has = "hasOwnProperty";
 var pathCommand = /([a-z])[\s,]*((-?\d*\.?\d*(?:e[\-+]?\d+)?[\s]*,?[\s]*)+)/ig;
 var pathValues = /(-?\d*\.?\d*(?:e[\-+]?\\d+)?)[\s]*,?[\s]*/ig;
+
+function fillPathItem(pathItem, last, current) {
+  if(!last) { return; }
+  if((cur || ["M"])[0] == "M") {
+    pathItem.push([last[1], last[2]);
+  }
+}
+function path2pathItem(path) {
+  return curve2pathItem(path2curve(path));
+}
+function curve2pathItem(curve) {
+  var i, last = null, item, list = [], result = [];
+  for(i=0;i<curve.length;i++) {
+    item = curve[i];
+    if(item[0] == "M") {
+      fillPathItem(last, item);
+      list.push([item[1],-item[2]]);
+      list.push([item[1],-item[2]]);
+    } else if(item[0] == "C") {
+      list.push([item[1], -item[2]]);
+      list.push([item[5], -item[6]]);
+      list.push([item[3], -item[4]]);
+    }
+    last = item;
+  }
+  fillPathItem(last, null);
+  for(i=0;i<list.length;i+=3) {
+    result.push([
+      "C", 
+      list[i + 0][0], list[i + 0][1],
+      list[i + 1][0], list[i + 1][1],
+      list[i + 2][0], list[i + 2][1]
+    ]);
+  }
+  return result;
+}
 function repush(array, item) {
     for (var i = 0, ii = array.length; i < ii; i++) if (array[i] === item) {
         return array.push(array.splice(i, 1)[0]);
@@ -567,9 +603,12 @@ function path2curve(path, path2) {
     }
     return p2 ? [p, p2] : p;
 }
-module.exports = path2curve;
+module.exports = {
+  toCurve: path2curve,
+  toPathItem: path2pathItem
+};
 if(typeof(window)!=="undefined") {
-  window.path2curve = path2curve;
+  window.pathconvert = module.exports;
 }
 })();
 
