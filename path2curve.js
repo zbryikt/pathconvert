@@ -30,6 +30,19 @@ function cacher(f, scope, postprocessor) {
     return newf;
 }
 
+function q2c(x1, y1, ax, ay, x2, y2) {
+    var _13 = 1 / 3,
+        _23 = 2 / 3;
+    return [
+            _13 * x1 + _23 * ax,
+            _13 * y1 + _23 * ay,
+            _13 * x2 + _23 * ax,
+            _13 * y2 + _23 * ay,
+            x2,
+            y2
+        ];
+}
+
 function a2c(x1, y1, rx, ry, angle, large_arc_flag, sweep_flag, x2, y2, recursive) {
     // for more information of where this math came from visit:
     // http://www.w3.org/TR/SVG11/implnote.html#ArcImplementationNotes
